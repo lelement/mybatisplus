@@ -45,10 +45,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         Map<String, Object> params = new HashMap<>();
         params.put("account",user.getAccount());
         List<User> userList = userMapper.selectByMap(params);
-        if (userList != null && userList.size() != 0) {
+        if (userList == null || userList.size() == 0) {
             return userMapper.insert(user);
         }else {
-            throw new APIException(ResultCode.ACCOUNT_NOT_EXIST);
+            throw new APIException(ResultCode.ACCOUNT_ALREADY_EXIST);
         }
     }
 

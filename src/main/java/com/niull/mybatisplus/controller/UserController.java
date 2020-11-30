@@ -9,6 +9,9 @@ import com.niull.mybatisplus.entity.User;
 import com.niull.mybatisplus.enums.ResultCode;
 import com.niull.mybatisplus.exception.APIException;
 import com.niull.mybatisplus.service.IUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,6 +27,7 @@ import javax.annotation.Resource;
  * @author niull
  * @since 2020-11-30
  */
+@Api(tags = "用户模块")
 @RestController
 @RequestMapping("/mybatisplus/user")
 public class UserController {
@@ -31,12 +35,13 @@ public class UserController {
     private IUserService userService;
     @Autowired
     private RedisTemplate redisTemplate;
-
+    @ApiOperation(value = "添加用户")
     @PostMapping("/addUser")
     public Integer addUser(@RequestBody User user){
         return userService.addUser(user);
     }
-
+    @ApiImplicitParam(name = "id",value = "id",required = true)
+    @ApiOperation(value = "更新用户信息")
     @PutMapping("/updateUser")
     public Integer updateUser(@RequestHeader("token") String token,
                               @RequestBody User user) throws InterruptedException {

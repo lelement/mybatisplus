@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionControllerAdvice {
     @ExceptionHandler(APIException.class)
     public JsonResult<String> APIExceptionHandler(APIException e) {
-        return JsonResult.errorMsg(e.getMessage());
+        return JsonResult.errorMsg(e.getCode(),e.getMsg());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

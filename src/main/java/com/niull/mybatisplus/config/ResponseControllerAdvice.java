@@ -3,6 +3,7 @@ package com.niull.mybatisplus.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niull.mybatisplus.common.JsonResult;
+import com.niull.mybatisplus.enums.ResultCode;
 import com.niull.mybatisplus.exception.APIException;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {
                 // 将数据包装在ResultVO里后，再转换为json字符串响应给前端
                 return objectMapper.writeValueAsString(new JsonResult(data));
             } catch (JsonProcessingException e) {
-                throw new APIException("返回String类型错误");
+                throw new APIException(ResultCode.RETURN_TYPE_ERROR);
             }
         }
         // 将原本的数据包装在ResultVO里

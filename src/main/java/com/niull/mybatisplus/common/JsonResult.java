@@ -19,7 +19,6 @@ public class JsonResult<T> {
     private Object data;
 
 
-
     public static JsonResult build(Integer status, String msg, Object data) {
         return new JsonResult(status, msg, data);
     }
@@ -36,9 +35,13 @@ public class JsonResult<T> {
         return new JsonResult(5000, msg, null);
     }
 
+    public static JsonResult errorMsg(Integer code, String msg) {
+        return new JsonResult(code, msg, null);
+    }
 
-    public static JsonResult error(ResultCode resultCode,String data) {
-        return new JsonResult(resultCode.getCode(),resultCode.getMsg(),data);
+
+    public static JsonResult error(ResultCode resultCode, String data) {
+        return new JsonResult(resultCode.getCode(), resultCode.getMsg(), data);
     }
 
     public JsonResult() {
